@@ -1,4 +1,4 @@
-FROM node:24-alpine3.23 AS base
+FROM node:26-alpine3.23 AS base
 
 WORKDIR /usr/app
 COPY ./package.json \
@@ -36,7 +36,7 @@ RUN npm run build
 # at build time), so @prisma/engines never downloads the schema engine that
 # `migrate deploy` needs; and the CLI has deps outside the @prisma scope (e.g.
 # effect). This stage produces a complete, self-contained CLI for the runtime.
-FROM node:24-alpine3.23 AS prisma-cli
+FROM node:26-alpine3.23 AS prisma-cli
 WORKDIR /opt/prisma-cli
 ENV CHECKPOINT_DISABLE=1
 RUN apk add --no-cache openssl
@@ -50,7 +50,7 @@ RUN PV="$(node -p "require('./_prisma.json').version")" && \
         echo "prisma install attempt $i failed, retrying in 10s..."; sleep 10; \
       done; exit 1 )
 
-FROM node:24-alpine3.23 AS runner
+FROM node:26-alpine3.23 AS runner
 
 EXPOSE 3000/tcp
 WORKDIR /usr/app
