@@ -330,8 +330,11 @@
     },
     "ByCategory": {
       "title": "Spese per categoria",
-      "description": "Importo totale speso in ogni categoria.",
-      "empty": "Non ci sono ancora spese."
+      "description": "Importo totale speso in ogni categoria. Seleziona una categoria per vedere le sue spese.",
+      "empty": "Non ci sono ancora spese.",
+      "showExpenses": "Mostra le spese di {category}",
+      "detailsDescription": "Spese di questa categoria nel periodo selezionato.",
+      "detailsEmpty": "Non ci sono spese in questa categoria."
     },
     "Recurring": {
       "title": "Spese ricorrenti",
@@ -362,8 +365,11 @@
     },
     "OverTime": {
       "title": "Spese nel tempo",
-      "description": "Spesa totale del gruppo per mese.",
-      "empty": "Non ci sono ancora spese."
+      "description": "Spesa totale del gruppo per mese. Seleziona un mese per vedere le sue spese.",
+      "empty": "Non ci sono ancora spese.",
+      "showExpenses": "Mostra le spese di {month}",
+      "detailsDescription": "Spese di questo mese nel periodo selezionato.",
+      "detailsEmpty": "Non ci sono spese in questo mese."
     }
   },
   "Activity": {

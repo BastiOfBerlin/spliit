@@ -148,8 +148,11 @@
     },
     "ByCategory": {
       "title": "Despesas por categoria",
-      "description": "Valor total gasto em cada categoria.",
-      "empty": "Ainda não existem despesas."
+      "description": "Valor total gasto em cada categoria. Seleciona uma categoria para ver as suas despesas.",
+      "empty": "Ainda não existem despesas.",
+      "showExpenses": "Mostrar as despesas de {category}",
+      "detailsDescription": "Despesas desta categoria no período selecionado.",
+      "detailsEmpty": "Não existem despesas nesta categoria."
     },
     "Recurring": {
       "title": "Despesas recorrentes",
@@ -180,8 +183,11 @@
     },
     "OverTime": {
       "title": "Despesas ao longo do tempo",
-      "description": "Despesa total do grupo por mês.",
-      "empty": "Ainda não existem despesas."
+      "description": "Despesa total do grupo por mês. Seleciona um mês para ver as suas despesas.",
+      "empty": "Ainda não existem despesas.",
+      "showExpenses": "Mostrar as despesas de {month}",
+      "detailsDescription": "Despesas deste mês no período selecionado.",
+      "detailsEmpty": "Não existem despesas neste mês."
     }
   }
 }
