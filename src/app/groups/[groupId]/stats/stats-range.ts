@@ -1,9 +1,4 @@
-export type StatsPeriod =
-  | 'all'
-  | 'thisMonth'
-  | 'last30'
-  | 'thisYear'
-  | 'custom'
+export type StatsPeriod = 'all' | 'thisMonth' | 'last30' | 'thisYear' | 'custom'
 
 export type StatsRange = { from?: string; to?: string }
 

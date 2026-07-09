@@ -54,7 +54,11 @@ describe('resolveStatsRange', () => {
 
   it('passes a custom range through verbatim', () => {
     expect(
-      resolveStatsRange('custom', { from: '2026-01-01', to: '2026-03-31' }, now),
+      resolveStatsRange(
+        'custom',
+        { from: '2026-01-01', to: '2026-03-31' },
+        now,
+      ),
     ).toEqual({ from: '2026-01-01', to: '2026-03-31' })
   })
 
@@ -78,7 +82,11 @@ describe('resolveStatsRange', () => {
 
   it('swaps reversed bounds', () => {
     expect(
-      resolveStatsRange('custom', { from: '2026-03-31', to: '2026-01-01' }, now),
+      resolveStatsRange(
+        'custom',
+        { from: '2026-03-31', to: '2026-01-01' },
+        now,
+      ),
     ).toEqual({ from: '2026-01-01', to: '2026-03-31' })
   })
 })
