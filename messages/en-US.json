@@ -337,8 +337,11 @@
     },
     "OverTime": {
       "title": "Spending over time",
-      "description": "Total group spending per month.",
-      "empty": "There are no expenses yet."
+      "description": "Total group spending per month. Select a month to see its expenses.",
+      "empty": "There are no expenses yet.",
+      "showExpenses": "Show expenses for {month}",
+      "detailsDescription": "Expenses in this month for the selected period.",
+      "detailsEmpty": "There are no expenses in this month."
     },
     "ByParticipant": {
       "title": "Spending by participant",

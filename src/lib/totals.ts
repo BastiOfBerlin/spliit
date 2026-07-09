@@ -161,6 +161,25 @@ export function getExpensesByCategory<
     .sort((a, b) => b.expenseDate.getTime() - a.expenseDate.getTime())
 }
 
+/**
+ * Returns the individual expenses that fall within a single `YYYY-MM` month, so
+ * the stats page can drill down from the "over time" card into the matching
+ * expenses. Uses the same month key and reimbursement exclusion as
+ * {@link getSpendingOverTime} so the list is consistent with the bar's total,
+ * and sorts newest first.
+ */
+export function getExpensesByMonth<
+  T extends { isReimbursement: boolean; expenseDate: Date },
+>(expenses: T[], month: string): T[] {
+  return expenses
+    .filter(
+      (expense) =>
+        !expense.isReimbursement &&
+        expense.expenseDate.toISOString().slice(0, 7) === month,
+    )
+    .sort((a, b) => b.expenseDate.getTime() - a.expenseDate.getTime())
+}
+
 export type ParticipantSpending = {
   participantId: string
   name: string

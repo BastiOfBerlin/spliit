@@ -1,6 +1,7 @@
 import {
   filterExpensesByDateRange,
   getExpensesByCategory,
+  getExpensesByMonth,
   getRecurringSpending,
   getSpendingByCategory,
   getSpendingByParticipant,
@@ -110,6 +111,35 @@ describe('getExpensesByCategory', () => {
     const result = getExpensesByCategory([uncategorized, categorized], 0)
 
     expect(result.map((expense) => expense.id)).toEqual(['a'])
+  })
+})
+
+describe('getExpensesByMonth', () => {
+  it('returns only the matching month, excludes reimbursements and sorts newest first', () => {
+    const early = makeExpense({
+      id: 'a',
+      expenseDate: new Date('2024-03-05T00:00:00Z'),
+    })
+    const late = makeExpense({
+      id: 'b',
+      expenseDate: new Date('2024-03-25T00:00:00Z'),
+    })
+    const otherMonth = makeExpense({
+      id: 'c',
+      expenseDate: new Date('2024-04-01T00:00:00Z'),
+    })
+    const reimbursement = makeExpense({
+      id: 'd',
+      isReimbursement: true,
+      expenseDate: new Date('2024-03-15T00:00:00Z'),
+    })
+
+    const result = getExpensesByMonth(
+      [early, late, otherMonth, reimbursement],
+      '2024-03',
+    )
+
+    expect(result.map((expense) => expense.id)).toEqual(['b', 'a'])
   })
 })
 
