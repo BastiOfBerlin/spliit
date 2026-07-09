@@ -351,8 +351,11 @@
     },
     "ByCategory": {
       "title": "Spending by category",
-      "description": "Total amount spent in each category.",
-      "empty": "There are no expenses yet."
+      "description": "Total amount spent in each category. Select a category to see its expenses.",
+      "empty": "There are no expenses yet.",
+      "showExpenses": "Show expenses for {category}",
+      "detailsDescription": "Expenses in this category for the selected period.",
+      "detailsEmpty": "There are no expenses in this category."
     },
     "Recurring": {
       "title": "Recurring expenses",

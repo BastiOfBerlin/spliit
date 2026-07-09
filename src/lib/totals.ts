@@ -139,6 +139,28 @@ export function getSpendingByCategory(
     .sort((a, b) => b.total - a.total)
 }
 
+/**
+ * Returns the individual expenses that make up a single category's spending,
+ * so the stats page can drill down from the "by category" card into the
+ * matching expenses. Uses the same category-matching (`category?.id ?? 0`) and
+ * reimbursement exclusion as {@link getSpendingByCategory} so the list is
+ * consistent with the aggregated total, and sorts newest first.
+ */
+export function getExpensesByCategory<
+  T extends {
+    category: { id: number } | null
+    isReimbursement: boolean
+    expenseDate: Date
+  },
+>(expenses: T[], categoryId: number): T[] {
+  return expenses
+    .filter(
+      (expense) =>
+        !expense.isReimbursement && (expense.category?.id ?? 0) === categoryId,
+    )
+    .sort((a, b) => b.expenseDate.getTime() - a.expenseDate.getTime())
+}
+
 export type ParticipantSpending = {
   participantId: string
   name: string

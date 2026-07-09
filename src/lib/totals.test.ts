@@ -1,5 +1,6 @@
 import {
   filterExpensesByDateRange,
+  getExpensesByCategory,
   getRecurringSpending,
   getSpendingByCategory,
   getSpendingByParticipant,
@@ -11,10 +12,13 @@ type Expense = Parameters<typeof getSpendingByCategory>[0][number]
 
 function makeExpense(partial: Partial<Expense>): Expense {
   return {
+    id: 'expense',
+    title: 'Expense',
     amount: 0,
     category: null,
     isReimbursement: false,
     splitMode: 'EVENLY',
+    expenseDate: new Date('2024-01-01T00:00:00Z'),
     paidBy: { id: 'alice', name: 'Alice' },
     paidFor: [],
     ...partial,
@@ -56,6 +60,56 @@ describe('getSpendingByCategory', () => {
         total: 200,
       },
     ])
+  })
+})
+
+describe('getExpensesByCategory', () => {
+  it('returns only the matching category, excludes reimbursements and sorts newest first', () => {
+    const older = makeExpense({
+      id: 'a',
+      amount: 1000,
+      category: groceries,
+      expenseDate: new Date('2024-01-10T00:00:00Z'),
+    })
+    const newer = makeExpense({
+      id: 'b',
+      amount: 500,
+      category: groceries,
+      expenseDate: new Date('2024-02-20T00:00:00Z'),
+    })
+    const otherCategory = makeExpense({
+      id: 'c',
+      amount: 3000,
+      category: transport,
+      expenseDate: new Date('2024-03-01T00:00:00Z'),
+    })
+    const reimbursement = makeExpense({
+      id: 'd',
+      amount: 9999,
+      category: groceries,
+      isReimbursement: true,
+      expenseDate: new Date('2024-04-01T00:00:00Z'),
+    })
+
+    const result = getExpensesByCategory(
+      [older, newer, otherCategory, reimbursement],
+      groceries.id,
+    )
+
+    expect(result.map((expense) => expense.id)).toEqual(['b', 'a'])
+  })
+
+  it('matches expenses without a category against the Uncategorized id (0)', () => {
+    const uncategorized = makeExpense({ id: 'a', amount: 200, category: null })
+    const categorized = makeExpense({
+      id: 'b',
+      amount: 300,
+      category: groceries,
+    })
+
+    const result = getExpensesByCategory([uncategorized, categorized], 0)
+
+    expect(result.map((expense) => expense.id)).toEqual(['a'])
   })
 })
 

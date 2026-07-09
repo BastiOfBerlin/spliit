@@ -66,7 +66,13 @@ export function TotalsPageClient() {
         participants={data?.participants}
         currency={currency}
       />
-      <CategoryBreakdown categories={data?.categories} currency={currency} />
+      <CategoryBreakdown
+        groupId={groupId}
+        categories={data?.categories}
+        currency={currency}
+        from={range.from}
+        to={range.to}
+      />
       <RecurringSpendingStats recurring={data?.recurring} currency={currency} />
     </>
   )
