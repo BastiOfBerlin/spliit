@@ -315,7 +315,10 @@
       "all": "All time",
       "thisMonth": "This month",
       "last30": "Last 30 days",
-      "thisYear": "This year"
+      "thisYear": "This year",
+      "custom": "Custom range",
+      "from": "From",
+      "to": "To"
     },
     "Totals": {
       "title": "Totals",

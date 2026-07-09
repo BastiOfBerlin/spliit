@@ -349,7 +349,10 @@
       "all": "Gesamter Zeitraum",
       "thisMonth": "Dieser Monat",
       "last30": "Letzte 30 Tage",
-      "thisYear": "Dieses Jahr"
+      "thisYear": "Dieses Jahr",
+      "custom": "Benutzerdefiniert",
+      "from": "Von",
+      "to": "Bis"
     },
     "Summary": {
       "title": "Zusammenfassung",
