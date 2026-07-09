@@ -40,10 +40,22 @@ export function AddGroupByUrlButton({ reload }: Props) {
           className="flex gap-2"
           onSubmit={async (event) => {
             event.preventDefault()
-            const [, groupId] =
-              url.match(
-                new RegExp(`${window.location.origin}/groups/([^/]+)`),
-              ) ?? []
+            // Parse the pasted URL with the URL API rather than building a
+            // RegExp from window.location.origin (a regex-injection sink).
+            // Only accept same-origin links pointing at /groups/<id>.
+            let groupId: string | undefined
+            try {
+              const parsed = new URL(url)
+              if (parsed.origin === window.location.origin) {
+                groupId = parsed.pathname.match(/^\/groups\/([^/]+)/)?.[1]
+              }
+            } catch {
+              // Unparseable input is treated as "not found" below.
+            }
+            if (!groupId) {
+              setError(true)
+              return
+            }
             setPending(true)
             const { group } = await utils.groups.get.fetch({
               groupId: groupId,
