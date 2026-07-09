@@ -167,7 +167,10 @@
       "all": "Todo o período",
       "thisMonth": "Este mês",
       "last30": "Últimos 30 dias",
-      "thisYear": "Este ano"
+      "thisYear": "Este ano",
+      "custom": "Personalizado",
+      "from": "De",
+      "to": "Até"
     },
     "Summary": {
       "title": "Resumo",

@@ -349,7 +349,10 @@
       "all": "Todo el tiempo",
       "thisMonth": "Este mes",
       "last30": "Últimos 30 días",
-      "thisYear": "Este año"
+      "thisYear": "Este año",
+      "custom": "Personalizado",
+      "from": "Desde",
+      "to": "Hasta"
     },
     "Summary": {
       "title": "Resumen",

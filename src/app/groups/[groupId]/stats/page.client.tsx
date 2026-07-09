@@ -5,8 +5,9 @@ import { ParticipantSpendingStats } from '@/app/groups/[groupId]/stats/participa
 import { RecurringSpendingStats } from '@/app/groups/[groupId]/stats/recurring-spending'
 import { SpendingOverTime } from '@/app/groups/[groupId]/stats/spending-over-time'
 import {
-  getRangeForPeriod,
+  resolveStatsRange,
   StatsPeriod,
+  StatsRange,
 } from '@/app/groups/[groupId]/stats/stats-range'
 import { StatsRangeSelector } from '@/app/groups/[groupId]/stats/stats-range-selector'
 import { SummaryStats } from '@/app/groups/[groupId]/stats/summary-stats'
@@ -32,7 +33,8 @@ export function TotalsPageClient() {
     activeUser && activeUser !== 'None' ? activeUser : undefined
 
   const [period, setPeriod] = useState<StatsPeriod>('all')
-  const range = getRangeForPeriod(period)
+  const [customRange, setCustomRange] = useState<StatsRange>({})
+  const range = resolveStatsRange(period, customRange)
 
   const { data } = trpc.groups.stats.overview.useQuery({
     groupId,
@@ -45,7 +47,12 @@ export function TotalsPageClient() {
 
   return (
     <>
-      <StatsRangeSelector period={period} onPeriodChange={setPeriod} />
+      <StatsRangeSelector
+        period={period}
+        customRange={customRange}
+        onPeriodChange={setPeriod}
+        onCustomRangeChange={setCustomRange}
+      />
       <SummaryStats summary={data?.summary} currency={currency} />
       <Card className="mb-4">
         <CardHeader>

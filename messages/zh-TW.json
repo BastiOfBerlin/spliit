@@ -349,7 +349,10 @@
       "all": "全部時間",
       "thisMonth": "本月",
       "last30": "最近 30 天",
-      "thisYear": "今年"
+      "thisYear": "今年",
+      "custom": "自訂範圍",
+      "from": "開始",
+      "to": "結束"
     },
     "Summary": {
       "title": "概覽",

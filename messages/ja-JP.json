@@ -349,7 +349,10 @@
       "all": "全期間",
       "thisMonth": "今月",
       "last30": "過去30日間",
-      "thisYear": "今年"
+      "thisYear": "今年",
+      "custom": "カスタム",
+      "from": "開始",
+      "to": "終了"
     },
     "Summary": {
       "title": "概要",

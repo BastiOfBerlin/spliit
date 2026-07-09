@@ -349,7 +349,10 @@
       "all": "全部时间",
       "thisMonth": "本月",
       "last30": "最近 30 天",
-      "thisYear": "今年"
+      "thisYear": "今年",
+      "custom": "自定义范围",
+      "from": "开始",
+      "to": "结束"
     },
     "Summary": {
       "title": "概览",
