@@ -330,8 +330,11 @@
     },
     "ByCategory": {
       "title": "Dépenses par catégorie",
-      "description": "Montant total dépensé dans chaque catégorie.",
-      "empty": "Il n'y a pas encore de dépenses."
+      "description": "Montant total dépensé dans chaque catégorie. Sélectionnez une catégorie pour voir ses dépenses.",
+      "empty": "Il n'y a pas encore de dépenses.",
+      "showExpenses": "Afficher les dépenses de {category}",
+      "detailsDescription": "Dépenses de cette catégorie pour la période sélectionnée.",
+      "detailsEmpty": "Il n'y a aucune dépense dans cette catégorie."
     },
     "Recurring": {
       "title": "Dépenses récurrentes",
@@ -365,8 +368,11 @@
     },
     "OverTime": {
       "title": "Dépenses au fil du temps",
-      "description": "Dépenses totales du groupe par mois.",
-      "empty": "Il n'y a pas encore de dépenses."
+      "description": "Dépenses totales du groupe par mois. Sélectionnez un mois pour voir ses dépenses.",
+      "empty": "Il n'y a pas encore de dépenses.",
+      "showExpenses": "Afficher les dépenses de {month}",
+      "detailsDescription": "Dépenses de ce mois pour la période sélectionnée.",
+      "detailsEmpty": "Il n'y a aucune dépense pour ce mois."
     }
   },
   "Activity": {

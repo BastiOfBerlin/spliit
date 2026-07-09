@@ -330,8 +330,11 @@
     },
     "ByCategory": {
       "title": "Uitgaven per categorie",
-      "description": "Totaalbedrag dat per categorie is uitgegeven.",
-      "empty": "Er zijn nog geen uitgaven."
+      "description": "Totaalbedrag dat per categorie is uitgegeven. Selecteer een categorie om de uitgaven te bekijken.",
+      "empty": "Er zijn nog geen uitgaven.",
+      "showExpenses": "Uitgaven voor {category} tonen",
+      "detailsDescription": "Uitgaven in deze categorie voor de geselecteerde periode.",
+      "detailsEmpty": "Er zijn geen uitgaven in deze categorie."
     },
     "Recurring": {
       "title": "Terugkerende uitgaven",
@@ -365,8 +368,11 @@
     },
     "OverTime": {
       "title": "Uitgaven in de tijd",
-      "description": "Totale uitgaven van de groep per maand.",
-      "empty": "Er zijn nog geen uitgaven."
+      "description": "Totale uitgaven van de groep per maand. Selecteer een maand om de uitgaven te bekijken.",
+      "empty": "Er zijn nog geen uitgaven.",
+      "showExpenses": "Uitgaven voor {month} tonen",
+      "detailsDescription": "Uitgaven in deze maand voor de geselecteerde periode.",
+      "detailsEmpty": "Er zijn geen uitgaven in deze maand."
     }
   },
   "Activity": {

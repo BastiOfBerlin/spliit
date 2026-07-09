@@ -68,12 +68,24 @@ export function TotalsPageClient() {
           />
         </CardContent>
       </Card>
-      <SpendingOverTime months={data?.months} currency={currency} />
+      <SpendingOverTime
+        groupId={groupId}
+        months={data?.months}
+        currency={currency}
+        from={range.from}
+        to={range.to}
+      />
       <ParticipantSpendingStats
         participants={data?.participants}
         currency={currency}
       />
-      <CategoryBreakdown categories={data?.categories} currency={currency} />
+      <CategoryBreakdown
+        groupId={groupId}
+        categories={data?.categories}
+        currency={currency}
+        from={range.from}
+        to={range.to}
+      />
       <RecurringSpendingStats recurring={data?.recurring} currency={currency} />
     </>
   )

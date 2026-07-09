@@ -330,8 +330,11 @@
     },
     "ByCategory": {
       "title": "Ausgaben nach Kategorie",
-      "description": "Gesamtbetrag pro Kategorie.",
-      "empty": "Es gibt noch keine Ausgaben."
+      "description": "Gesamtbetrag pro Kategorie. Wähle eine Kategorie, um ihre Ausgaben zu sehen.",
+      "empty": "Es gibt noch keine Ausgaben.",
+      "showExpenses": "Ausgaben für {category} anzeigen",
+      "detailsDescription": "Ausgaben in dieser Kategorie im gewählten Zeitraum.",
+      "detailsEmpty": "Es gibt keine Ausgaben in dieser Kategorie."
     },
     "Recurring": {
       "title": "Wiederkehrende Ausgaben",
@@ -365,8 +368,11 @@
     },
     "OverTime": {
       "title": "Ausgaben im Zeitverlauf",
-      "description": "Gesamtausgaben der Gruppe pro Monat.",
-      "empty": "Es gibt noch keine Ausgaben."
+      "description": "Gesamtausgaben der Gruppe pro Monat. Wähle einen Monat, um seine Ausgaben zu sehen.",
+      "empty": "Es gibt noch keine Ausgaben.",
+      "showExpenses": "Ausgaben für {month} anzeigen",
+      "detailsDescription": "Ausgaben in diesem Monat im gewählten Zeitraum.",
+      "detailsEmpty": "Es gibt keine Ausgaben in diesem Monat."
     }
   },
   "Activity": {

@@ -330,8 +330,11 @@
     },
     "ByCategory": {
       "title": "Gastos por categoría",
-      "description": "Cantidad total gastada en cada categoría.",
-      "empty": "Todavía no hay gastos."
+      "description": "Cantidad total gastada en cada categoría. Selecciona una categoría para ver sus gastos.",
+      "empty": "Todavía no hay gastos.",
+      "showExpenses": "Mostrar los gastos de {category}",
+      "detailsDescription": "Gastos de esta categoría en el período seleccionado.",
+      "detailsEmpty": "No hay gastos en esta categoría."
     },
     "Recurring": {
       "title": "Gastos recurrentes",
@@ -365,8 +368,11 @@
     },
     "OverTime": {
       "title": "Gastos a lo largo del tiempo",
-      "description": "Gasto total del grupo por mes.",
-      "empty": "Todavía no hay gastos."
+      "description": "Gasto total del grupo por mes. Selecciona un mes para ver sus gastos.",
+      "empty": "Todavía no hay gastos.",
+      "showExpenses": "Mostrar los gastos de {month}",
+      "detailsDescription": "Gastos de este mes en el período seleccionado.",
+      "detailsEmpty": "No hay gastos en este mes."
     }
   },
   "Activity": {
