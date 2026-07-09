@@ -349,7 +349,10 @@
       "all": "Tout le temps",
       "thisMonth": "Ce mois-ci",
       "last30": "30 derniers jours",
-      "thisYear": "Cette année"
+      "thisYear": "Cette année",
+      "custom": "Période personnalisée",
+      "from": "Du",
+      "to": "Au"
     },
     "Summary": {
       "title": "Résumé",

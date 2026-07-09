@@ -311,7 +311,10 @@
       "all": "Cały czas",
       "thisMonth": "Ten miesiąc",
       "last30": "Ostatnie 30 dni",
-      "thisYear": "Ten rok"
+      "thisYear": "Ten rok",
+      "custom": "Zakres niestandardowy",
+      "from": "Od",
+      "to": "Do"
     },
     "Summary": {
       "title": "Podsumowanie",

@@ -291,7 +291,10 @@
       "all": "전체 기간",
       "thisMonth": "이번 달",
       "last30": "지난 30일",
-      "thisYear": "올해"
+      "thisYear": "올해",
+      "custom": "사용자 지정",
+      "from": "시작",
+      "to": "종료"
     },
     "Summary": {
       "title": "요약",

@@ -349,7 +349,10 @@
       "all": "Alle tijd",
       "thisMonth": "Deze maand",
       "last30": "Laatste 30 dagen",
-      "thisYear": "Dit jaar"
+      "thisYear": "Dit jaar",
+      "custom": "Aangepast",
+      "from": "Van",
+      "to": "Tot"
     },
     "Summary": {
       "title": "Samenvatting",

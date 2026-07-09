@@ -349,7 +349,10 @@
       "all": "Tot el temps",
       "thisMonth": "Aquest mes",
       "last30": "Últims 30 dies",
-      "thisYear": "Enguany"
+      "thisYear": "Enguany",
+      "custom": "Personalitzat",
+      "from": "Des de",
+      "to": "Fins a"
     },
     "Summary": {
       "title": "Resum",

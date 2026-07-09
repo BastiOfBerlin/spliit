@@ -349,7 +349,10 @@
       "all": "Sempre",
       "thisMonth": "Questo mese",
       "last30": "Ultimi 30 giorni",
-      "thisYear": "Quest'anno"
+      "thisYear": "Quest'anno",
+      "custom": "Personalizzato",
+      "from": "Da",
+      "to": "A"
     },
     "Summary": {
       "title": "Riepilogo",
