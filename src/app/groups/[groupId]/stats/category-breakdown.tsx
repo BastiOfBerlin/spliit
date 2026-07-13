@@ -16,6 +16,7 @@ import { Currency } from '@/lib/currency'
 import { CategorySpending } from '@/lib/totals'
 import { formatCurrency } from '@/lib/utils'
 import { trpc } from '@/trpc/client'
+import { ChevronRight } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 
@@ -102,7 +103,7 @@ function CategoryBars({
               key={category.categoryId}
               type="button"
               onClick={() => setSelected(category)}
-              className="flex w-full flex-col gap-1.5 rounded-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="group -mx-2 flex w-full cursor-pointer flex-col gap-1.5 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={tByCategory('showExpenses', {
                 category: t(`${category.grouping}.${category.name}`),
               })}
@@ -121,9 +122,12 @@ function CategoryBars({
                     {t(`${category.grouping}.${category.name}`)}
                   </span>
                 </div>
-                <span className="shrink-0 tabular-nums text-muted-foreground">
-                  {formatCurrency(currency, category.total, locale)} ({share}%)
-                </span>
+                <div className="flex shrink-0 items-center gap-1">
+                  <span className="tabular-nums text-muted-foreground">
+                    {`${formatCurrency(currency, category.total, locale)} (${share}%)`}
+                  </span>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground/50 transition-colors group-hover:text-muted-foreground" />
+                </div>
               </div>
               <StatBar
                 value={category.total}
