@@ -15,6 +15,7 @@ import { Currency } from '@/lib/currency'
 import { MonthlySpending } from '@/lib/totals'
 import { formatCurrency } from '@/lib/utils'
 import { trpc } from '@/trpc/client'
+import { ChevronRight } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 
@@ -103,14 +104,17 @@ function MonthlyBars({
             key={month.month}
             type="button"
             onClick={() => setSelected(month.month)}
-            className="flex w-full flex-col gap-1.5 rounded-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group -mx-2 flex w-full cursor-pointer flex-col gap-1.5 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={t('showExpenses', { month: formatMonth(month.month) })}
           >
             <div className="flex items-center justify-between gap-2 text-sm">
               <span className="capitalize">{formatMonth(month.month)}</span>
-              <span className="shrink-0 tabular-nums text-muted-foreground">
-                {formatCurrency(currency, month.total, locale)}
-              </span>
+              <div className="flex shrink-0 items-center gap-1">
+                <span className="tabular-nums text-muted-foreground">
+                  {formatCurrency(currency, month.total, locale)}
+                </span>
+                <ChevronRight className="h-4 w-4 text-muted-foreground/50 transition-colors group-hover:text-muted-foreground" />
+              </div>
             </div>
             <StatBar
               value={month.total}
