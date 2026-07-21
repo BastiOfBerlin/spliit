@@ -40,5 +40,8 @@ function startOfWeek(date: Dayjs, weekStartsOn: number): Dayjs {
  * `weekStartsOn` (0 = Sunday … 6 = Saturday).
  */
 export function isSameWeek(a: Dayjs, b: Dayjs, weekStartsOn: number): boolean {
-  return startOfWeek(a, weekStartsOn).isSame(startOfWeek(b, weekStartsOn), 'day')
+  return startOfWeek(a, weekStartsOn).isSame(
+    startOfWeek(b, weekStartsOn),
+    'day',
+  )
 }
