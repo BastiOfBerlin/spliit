@@ -241,7 +241,9 @@
     "reimbursement": "Возмещение",
     "conversionUnavailable": "Чтобы задать отдельную валюту для расхода и конвертировать суммы, выберите для группы непользовательскую валюту.",
     "originalAmountField": {
-      "label": "Сумма для конвертации"
+      "label": "Сумма для конвертации",
+      "repaymentLabel": "Сумма к переводу",
+      "repaymentDescription": "Пересчитано из указанной выше суммы, которая и погашает долг."
     },
     "conversionRateField": {
       "useApi": "Использовать курсы Frankfurter",

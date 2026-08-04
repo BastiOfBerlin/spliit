@@ -240,7 +240,9 @@
     "cancel": "取消",
     "reimbursement": "报销",
     "originalAmountField": {
-      "label": "需要转换的金额"
+      "label": "需要转换的金额",
+      "repaymentLabel": "需要转账的金额",
+      "repaymentDescription": "由上方金额换算而来；结清余额的是上方的金额。"
     },
     "conversionRateField": {
       "useApi": "使用Frankfurter提供的汇率",

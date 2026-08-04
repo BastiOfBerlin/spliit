@@ -241,7 +241,9 @@
     "reimbursement": "Reembolso",
     "conversionUnavailable": "Para establecer una moneda diferente por gasto y convertir los importes, seleccione una moneda no personalizada para el grupo.",
     "originalAmountField": {
-      "label": "Monto a convertir"
+      "label": "Monto a convertir",
+      "repaymentLabel": "Monto a transferir",
+      "repaymentDescription": "Convertido del monto de arriba, que es el que salda el balance."
     },
     "conversionRateField": {
       "useApi": "Utilizar las tasas del Frankfurter",
