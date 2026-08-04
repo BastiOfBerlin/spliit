@@ -350,6 +350,8 @@ export async function getGroupExpenses(
       expenseDate: true,
       id: true,
       isReimbursement: true,
+      originalAmount: true,
+      originalCurrency: true,
       paidBy: { select: { id: true, name: true } },
       paidFor: {
         select: {
