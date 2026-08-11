@@ -241,7 +241,9 @@
     "reimbursement": "Reemborsament",
     "conversionUnavailable": "Per a seleccionar una moneda diferent per despesa i convertir quantitats, tria una moneda no personalitzada per al grup.",
     "originalAmountField": {
-      "label": "Quantitat a convertir"
+      "label": "Quantitat a convertir",
+      "repaymentLabel": "Quantitat a transferir",
+      "repaymentDescription": "Convertida a partir de la quantitat de dalt, que és la que salda el balanç."
     },
     "conversionRateField": {
       "useApi": "Emprar les tases de Frankfurter",
