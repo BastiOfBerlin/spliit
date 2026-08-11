@@ -1,9 +1,9 @@
 import { getCurrency } from '@/lib/currency'
 import { prisma } from '@/lib/prisma'
+import { getExpenseShares } from '@/lib/shares'
 import { formatAmountAsDecimal, getCurrencyFromGroup } from '@/lib/utils'
 import { Parser } from '@json2csv/plainjs'
 import { create as contentDisposition } from 'content-disposition'
-import Decimal from 'decimal.js'
 import { NextResponse } from 'next/server'
 
 const splitModeLabel = {
@@ -46,6 +46,9 @@ export async function GET(
       currencyCode: true,
       expenses: {
         select: {
+          // Seeds which participant is offered the leftover minor unit of an
+          // uneven split, so the export agrees with the balances tab.
+          id: true,
           expenseDate: true,
           title: true,
           category: { select: { name: true } },
@@ -112,58 +115,46 @@ export async function GET(
 
   const currency = getCurrencyFromGroup(group)
 
-  const expenses = group.expenses.map((expense) => ({
-    date: formatDate(expense.expenseDate),
-    title: escapeCsvFormula(expense.title),
-    categoryName: escapeCsvFormula(expense.category?.name || ''),
-    currency: group.currencyCode ?? group.currency,
-    amount: formatAmountAsDecimal(expense.amount, currency),
-    originalAmount: expense.originalAmount
-      ? formatAmountAsDecimal(
-          expense.originalAmount,
-          getCurrency(expense.originalCurrency),
-        )
-      : null,
-    originalCurrency: expense.originalCurrency,
-    conversionRate: expense.conversionRate
-      ? expense.conversionRate.toString()
-      : null,
-    isReimbursement: expense.isReimbursement ? 'Yes' : 'No',
-    splitMode: splitModeLabel[expense.splitMode],
-    ...Object.fromEntries(
-      group.participants.map((participant) => {
-        const { totalShares, participantShare } = expense.paidFor.reduce(
-          (acc, { participantId, shares }) => {
-            acc.totalShares += shares
-            if (participantId === participant.id) {
-              acc.participantShare = shares
-            }
-            return acc
-          },
-          { totalShares: 0, participantShare: 0 },
-        )
+  const expenses = group.expenses.map((expense) => {
+    const shares = getExpenseShares(expense)
 
-        const isPaidByParticipant = expense.paidById === participant.id
-        // Guard against division by zero (an expense with no shares) and use
-        // Decimal to avoid floating-point rounding on the cents-based amount.
-        const shareInMinorUnits =
-          totalShares === 0
-            ? new Decimal(0)
-            : new Decimal(expense.amount)
-                .times(participantShare)
-                .dividedBy(totalShares)
-        const participantAmountShare = +formatAmountAsDecimal(
-          shareInMinorUnits.toNumber(),
-          currency,
-        )
+    return {
+      date: formatDate(expense.expenseDate),
+      title: escapeCsvFormula(expense.title),
+      categoryName: escapeCsvFormula(expense.category?.name || ''),
+      currency: group.currencyCode ?? group.currency,
+      amount: formatAmountAsDecimal(expense.amount, currency),
+      originalAmount: expense.originalAmount
+        ? formatAmountAsDecimal(
+            expense.originalAmount,
+            getCurrency(expense.originalCurrency),
+          )
+        : null,
+      originalCurrency: expense.originalCurrency,
+      conversionRate: expense.conversionRate
+        ? expense.conversionRate.toString()
+        : null,
+      isReimbursement: expense.isReimbursement ? 'Yes' : 'No',
+      splitMode: splitModeLabel[expense.splitMode],
+      ...Object.fromEntries(
+        group.participants.map((participant) => {
+          const isPaidByParticipant = expense.paidById === participant.id
+          // The same apportionment the balances tab uses, so a participant's
+          // column here matches what they are actually charged: whole minor
+          // units, honouring the split mode, adding up to the expense amount.
+          const participantAmountShare = +formatAmountAsDecimal(
+            shares.get(participant.id) ?? 0,
+            currency,
+          )
 
-        return [
-          participant.name,
-          participantAmountShare * (isPaidByParticipant ? 1 : -1),
-        ]
-      }),
-    ),
-  }))
+          return [
+            participant.name,
+            participantAmountShare * (isPaidByParticipant ? 1 : -1),
+          ]
+        }),
+      ),
+    }
+  })
 
   const json2csvParser = new Parser({ fields })
   const csv = json2csvParser.parse(expenses)
