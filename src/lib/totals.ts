@@ -1,5 +1,6 @@
 import type { RecurrenceRule } from '@/generated/prisma/client'
 import { getGroupExpenses } from '@/lib/api'
+import { ShareInput, getExpenseShares, getParticipantShare } from '@/lib/shares'
 
 /**
  * Filters expenses to those whose `expenseDate` falls within an inclusive
@@ -46,57 +47,55 @@ export function getTotalActiveUserPaidFor(
 
 type Expense = NonNullable<Awaited<ReturnType<typeof getGroupExpenses>>>[number]
 
+type SplittableExpense = Pick<
+  Expense,
+  'amount' | 'paidFor' | 'splitMode' | 'isReimbursement'
+> & { id?: string | null }
+
+/**
+ * Maps an expense into the shape {@link getExpenseShares} takes. The id decides
+ * who is offered the leftover minor unit of an uneven split; passing it keeps
+ * the stats and the expense form in step with the balances tab.
+ */
+function toShareInput(expense: SplittableExpense): ShareInput {
+  return {
+    id: expense.id,
+    amount: expense.amount,
+    splitMode: expense.splitMode,
+    paidFor: expense.paidFor.map(({ participant, shares }) => ({
+      participantId: participant.id,
+      shares: Number(shares),
+    })),
+  }
+}
+
+/**
+ * A participant's share of a single expense, in whole minor units.
+ *
+ * Delegates to the shared apportionment so that the number shown on the stats
+ * pages, in the CSV export and next to a participant in the expense form is the
+ * same one the balances tab charges them. Reimbursements count as zero here:
+ * unlike balances, the spending stats deliberately ignore settling up.
+ */
 export function calculateShare(
   participantId: string | null,
-  expense: Pick<
-    Expense,
-    'amount' | 'paidFor' | 'splitMode' | 'isReimbursement'
-  >,
+  expense: SplittableExpense,
 ): number {
   if (expense.isReimbursement) return 0
 
-  const paidFors = expense.paidFor
-  const userPaidFor = paidFors.find(
-    (paidFor) => paidFor.participant.id === participantId,
-  )
-
-  if (!userPaidFor) return 0
-
-  const shares = Number(userPaidFor.shares)
-
-  switch (expense.splitMode) {
-    case 'EVENLY':
-      // Divide the total expense evenly among all participants
-      return expense.amount / paidFors.length
-    case 'BY_AMOUNT':
-      // Directly add the user's share if the split mode is BY_AMOUNT
-      return shares
-    case 'BY_PERCENTAGE':
-      // Calculate the user's share based on their percentage of the total expense
-      return (expense.amount * shares) / 10000 // Assuming shares are out of 10000 for percentage
-    case 'BY_SHARES':
-      // Calculate the user's share based on their shares relative to the total shares
-      const totalShares = paidFors.reduce(
-        (sum, paidFor) => sum + Number(paidFor.shares),
-        0,
-      )
-      if (totalShares === 0) return 0
-      return (expense.amount * shares) / totalShares
-    default:
-      return 0
-  }
+  return getParticipantShare(participantId, toShareInput(expense))
 }
 
 export function getTotalActiveUserShare(
   activeUserId: string | null,
   expenses: NonNullable<Awaited<ReturnType<typeof getGroupExpenses>>>,
 ): number {
-  const total = expenses.reduce(
+  // Every share is a whole number of minor units, so the sum needs no rounding
+  // — rounding it here is what used to make the totals disagree with balances.
+  return expenses.reduce(
     (sum, expense) => sum + calculateShare(activeUserId, expense),
     0,
   )
-
-  return parseFloat(total.toFixed(2))
 }
 
 export type CategorySpending = {
@@ -214,11 +213,13 @@ export function getSpendingByParticipant(
       payer.paidCount += 1
     }
 
-    for (const paidFor of expense.paidFor) {
-      const entry = totals.get(paidFor.participant.id)
-      if (entry) {
-        entry.share += calculateShare(paidFor.participant.id, expense)
-      }
+    // Split the expense once and hand out the shares, rather than re-deriving
+    // the whole split for every participant.
+    for (const [participantId, share] of getExpenseShares(
+      toShareInput(expense),
+    )) {
+      const entry = totals.get(participantId)
+      if (entry) entry.share += share
     }
   }
 
@@ -230,7 +231,7 @@ export function getSpendingByParticipant(
         name: participant.name,
         paid: entry.paid,
         paidCount: entry.paidCount,
-        share: parseFloat(entry.share.toFixed(2)),
+        share: entry.share,
       }
     })
     .sort((a, b) => b.paid - a.paid)
