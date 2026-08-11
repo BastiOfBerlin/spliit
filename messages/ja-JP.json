@@ -241,7 +241,9 @@
     "reimbursement": "払い戻し",
     "conversionUnavailable": "支出ごとに異なる通貨を設定して金額を換算するには、グループの通貨をカスタム以外の通貨に設定してください。",
     "originalAmountField": {
-      "label": "換算する金額"
+      "label": "換算する金額",
+      "repaymentLabel": "送金する金額",
+      "repaymentDescription": "上の金額から換算した金額です。残高を清算するのは上の金額です。"
     },
     "conversionRateField": {
       "useApi": "Frankfurterのレートを使用する",

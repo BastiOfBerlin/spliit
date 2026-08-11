@@ -241,24 +241,26 @@
     "reimbursement": "Rückzahlung",
     "conversionUnavailable": "Um für jede Ausgabe eine andere Währung festzulegen und Beträge umzurechnen, wählen Sie eine nicht benutzerdefinierte Währung für die Gruppe aus.",
     "originalAmountField": {
-      "label": "Umzurechnender Betrag"
+      "label": "Umzurechnender Betrag",
+      "repaymentLabel": "Zu überweisender Betrag",
+      "repaymentDescription": "Umgerechnet aus dem Betrag oben, der die Bilanz ausgleicht."
     },
     "conversionRateState": {
       "customRate": "Benutzerdefinierte Rate verwenden",
       "loading": "Wechselkurse abrufen…",
-      "success": "Erhaltene Zinssätze:",
-      "error": "Oops, wir konnten die aktuellsten Zinssätze nicht abrufen.",
-      "staleRate": "Verwendeter Zinssatz:",
-      "noRate": "Geben Sie unten einen benutzerdefinierten Zinssatz ein.",
+      "success": "Erhaltene Kurse:",
+      "error": "Oops, wir konnten die aktuellsten Kurse nicht abrufen.",
+      "staleRate": "Verwendeter Kurs:",
+      "noRate": "Geben Sie unten einen benutzerdefinierten Kurs ein.",
       "noDate": "Geben Sie das Ausgabedatum ein, um einen Umrechnungskurs zu erhalten.",
-      "dateMismatch": "Zinssätze von Datum: {date}",
+      "dateMismatch": "Kurse vom Datum: {date}",
       "refresh": "Aktualisiere",
-      "currencyNotFound": "Oops, Frankfurter hat für diese Währung an diesem Tag keinen Zinssatz."
+      "currencyNotFound": "Oops, Frankfurter hat für diese Währung an diesem Tag keinen Kurs."
     },
     "conversionRateField": {
       "useCustom": "Benutze individuelle Rate",
       "label": "Wechselkurs",
-      "useApi": "Benutze Zinssätze von Frankfurter"
+      "useApi": "Benutze Kurse von Frankfurter"
     }
   },
   "ExpenseDocumentsInput": {
@@ -428,7 +430,7 @@
     "noZeroShares": "Alle Anteile müssen größer als 0 sein.",
     "amountSum": "Die Summe der Beträge muss dem Betrag der Ausgabe entsprechen.",
     "percentageSum": "Die Summe der prozentualen Anteile muss 100 ergeben.",
-    "ratePositive": "Der Zinssatz muss unbedingt größer als Null sein."
+    "ratePositive": "Der Wechselkurs muss größer als Null sein."
   },
   "Categories": {
     "search": "Nach Kategorie suchen...",

@@ -253,7 +253,9 @@
     },
     "conversionUnavailable": "Per impostare una valuta diversa per ogni spesa e convertire gli importi, seleziona una valuta non personalizzata per il gruppo.",
     "originalAmountField": {
-      "label": "Importo da convertire"
+      "label": "Importo da convertire",
+      "repaymentLabel": "Importo da trasferire",
+      "repaymentDescription": "Convertito dall'importo qui sopra, che è quello che pareggia i conti."
     },
     "conversionRateField": {
       "useApi": "Usa i tassi di Frankfurter",

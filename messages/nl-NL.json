@@ -241,7 +241,9 @@
     "reimbursement": "Terugbetaling",
     "conversionUnavailable": "Om een andere munteenheid in te stellen voor een uitgave en bedragen om te rekenen, kies een standaard munteenheid voor de groep.",
     "originalAmountField": {
-      "label": "Om te rekenen bedrag"
+      "label": "Om te rekenen bedrag",
+      "repaymentLabel": "Over te maken bedrag",
+      "repaymentDescription": "Omgerekend van het bedrag hierboven, dat de balans vereffent."
     },
     "conversionRateField": {
       "useApi": "Gebruik koersen van Frankfurter",

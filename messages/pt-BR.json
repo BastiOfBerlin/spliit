@@ -258,7 +258,9 @@
     },
     "conversionUnavailable": "Para definir uma moeda diferente por despesa e converter valores, selecione uma moeda não personalizada para o grupo.",
     "originalAmountField": {
-      "label": "Valor a converter"
+      "label": "Valor a converter",
+      "repaymentLabel": "Valor a transferir",
+      "repaymentDescription": "Convertido do valor acima, que é o que zera o saldo."
     }
   },
   "ExpenseDocumentsInput": {
