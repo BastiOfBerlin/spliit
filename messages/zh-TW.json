@@ -45,8 +45,8 @@
     "paidBy": "由 <strong>{paidBy}</strong> 支付 <paidFor></paidFor>。",
     "receivedBy": "由 <strong>{paidBy}</strong> 收取 <paidFor></paidFor>。",
     "yourBalance": "你的餘額：",
-    "everyone": "所有人",
-    "notInvolved": "你未參與"
+    "everyone": "大家",
+    "notInvolved": "不包含你"
   },
   "Groups": {
     "myGroups": "我的群組",
@@ -56,13 +56,6 @@
       "description": "你最近沒有訪問過任何群組。",
       "create": "建立一個新群組",
       "orAsk": "或請朋友發送已建立的群組鏈接。"
-    },
-    "GlobalBalance": {
-      "title": "你的總餘額",
-      "description": "你在所有群組中的合計餘額。",
-      "owedToYou": "應收",
-      "youOwe": "應付",
-      "settledUp": "你在所有群組中均已結清。"
     },
     "recent": "最近的群組",
     "starred": "已加星標的群組",
@@ -85,6 +78,13 @@
     "NotFound": {
       "text": "該群組不存在。",
       "link": "前往最近訪問的群組"
+    },
+    "GlobalBalance": {
+      "title": "你的總餘額",
+      "description": "你在所有群組中的合計餘額。",
+      "owedToYou": "應收",
+      "youOwe": "應付",
+      "settledUp": "你在所有群組中均已結清。"
     }
   },
   "GroupForm": {
@@ -129,9 +129,9 @@
       "cancel": "取消"
     },
     "CurrencyCodeField": {
-      "label": "主要貨幣",
-      "createDescription": "所有金額和餘額都將使用此貨幣。",
-      "editDescription": "所有金額和餘額都將使用此貨幣。變更此項不會換算已經輸入的支出，除非新貨幣的「最小單位」與目前貨幣不同（例如從美元變更為日圓）。",
+      "label": "主要幣別",
+      "createDescription": "全部的帳戶及金額都會使用此幣別。",
+      "editDescription": "全部的帳戶及金額都會使用此幣別。更改此項目不會影響已建立的消費紀錄，除非轉換幣別有小數點（例如由美金轉換為日幣時）",
       "customOption": "自訂"
     }
   },
@@ -188,17 +188,17 @@
       },
       "splitModeDescription": "選擇如何分配此筆消費。",
       "attachDescription": "查看／附上此筆消費的收據。",
+      "recurrenceRule": {
+        "description": "請選擇消費的重複週期。",
+        "none": "無",
+        "daily": "每天",
+        "weekly": "每週",
+        "monthly": "每月",
+        "label": "支出重複"
+      },
       "currencyField": {
         "label": "支出貨幣",
         "description": "支付這筆支出所使用的貨幣。"
-      },
-      "recurrenceRule": {
-        "label": "支出重複",
-        "description": "選擇支出重複的頻率。",
-        "none": "無",
-        "daily": "每日",
-        "weekly": "每週",
-        "monthly": "每月"
       }
     },
     "amountField": {
@@ -403,10 +403,10 @@
   "Share": {
     "title": "分享",
     "description": "將此網址分享給其他人以加入群組並查看及新增消費紀錄",
-    "copyLink": "複製連結",
-    "shareLink": "分享連結",
     "warning": "警告！",
-    "warningHelp": "任何有此連結的人都可以看到及編輯消費紀錄。請小心使用！"
+    "warningHelp": "任何有此連結的人都可以看到及編輯消費紀錄。請小心使用！",
+    "copyLink": "複製連結",
+    "shareLink": "分享連結"
   },
   "SchemaErrors": {
     "min1": "請輸入至少 1 個字。",

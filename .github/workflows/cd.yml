@@ -14,6 +14,9 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
+  # Each platform is built on a runner of that architecture, then pushed
+  # untagged (by digest only). Emulating linux/arm64 with QEMU crashes Node
+  # during `npm ci` with an illegal instruction, so we never emulate.
   build:
     name: Build (${{ matrix.platform }})
     runs-on: ${{ matrix.runner }}
@@ -77,6 +80,8 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
+  # Combine the per-architecture digests into a single multi-arch manifest
+  # published under the version tag and `latest`.
   merge:
     name: Merge and publish manifest
     runs-on: ubuntu-latest

@@ -1,6 +1,6 @@
 {
   "Homepage": {
-    "title": "Compartilhe <strong>Despesas</strong> com <strong>Amigos e Família</strong>",
+    "title": "Compartilhe <strong>Despesas</strong> com <strong>Amigos & Família</strong>",
     "description": "Bem-vindo à sua nova instalação do <strong>Spliit</strong>!",
     "button": {
       "groups": "Ir para grupos",
@@ -57,13 +57,6 @@
       "create": "Crie um",
       "orAsk": "ou peça a um amigo para enviar o link de um existente."
     },
-    "GlobalBalance": {
-      "title": "Seu saldo total",
-      "description": "Seu saldo combinado em todos os seus grupos.",
-      "owedToYou": "Você tem a receber",
-      "youOwe": "Você deve",
-      "settledUp": "Você está quitado em todos os seus grupos."
-    },
     "recent": "Grupos recentes",
     "starred": "Grupos favoritos",
     "archived": "Grupos arquivados",
@@ -85,6 +78,13 @@
     "NotFound": {
       "text": "Este grupo não existe.",
       "link": "Ir para grupos visitados recentemente"
+    },
+    "GlobalBalance": {
+      "title": "Seu saldo total",
+      "description": "Seu saldo combinado em todos os seus grupos.",
+      "owedToYou": "Você tem a receber",
+      "youOwe": "Você deve",
+      "settledUp": "Você está quitado em todos os seus grupos."
     }
   },
   "GroupForm": {
@@ -161,7 +161,7 @@
       "attachDescription": "Veja e anexe recibos à receita.",
       "currencyField": {
         "label": "Moeda da receita",
-        "description": "A moeda em que a receita foi recebida."
+        "description": "Em qual moeda a receita foi recebida"
       }
     },
     "Expense": {
@@ -190,7 +190,7 @@
       "attachDescription": "Veja e anexe recibos à despesa.",
       "recurrenceRule": {
         "label": "Recorrência da Despesa",
-        "description": "Selecione a frequência de recorrência da despesa.",
+        "description": "Selecione a frequência com que a despesa deve se repetir.",
         "none": "Nenhuma",
         "daily": "Diariamente",
         "weekly": "Semanalmente",
@@ -241,19 +241,19 @@
     "reimbursement": "Reembolso",
     "conversionRateField": {
       "label": "Taxa de câmbio",
-      "useApi": "Usar taxas do Frankfurter",
-      "useCustom": "Usar taxa personalizada"
+      "useApi": "Use as taxas da Frankfurter",
+      "useCustom": "Use taxa personalizada"
     },
     "conversionRateState": {
       "success": "Taxas obtidas:",
       "error": "Opa, não conseguimos obter as taxas mais recentes.",
       "refresh": "Atualizar",
       "loading": "Obtendo taxas de câmbio…",
-      "staleRate": "Usando a taxa:",
+      "staleRate": "Usando taxa:",
       "noRate": "Insira uma taxa personalizada abaixo.",
-      "currencyNotFound": "Ops, o Frankfurter não tem a taxa para esta moeda neste dia.",
+      "currencyNotFound": "Opa, a Frankfurter não tem a taxa para esta moeda neste dia.",
       "noDate": "Insira a data da despesa para obter uma taxa de conversão.",
-      "dateMismatch": "Taxas da data: {date}",
+      "dateMismatch": "Taxas a partir da data: {date}",
       "customRate": "Usando taxa personalizada"
     },
     "conversionUnavailable": "Para definir uma moeda diferente por despesa e converter valores, selecione uma moeda não personalizada para o grupo.",
@@ -409,10 +409,10 @@
   "Share": {
     "title": "Compartilhar",
     "description": "Para que outros participantes vejam o grupo e adicionem despesas, compartilhe o link com eles.",
-    "copyLink": "Copiar link",
-    "shareLink": "Compartilhar link",
     "warning": "Aviso!",
-    "warningHelp": "Toda pessoa com o link do grupo poderá ver e editar despesas. Compartilhe com cautela!"
+    "warningHelp": "Toda pessoa com o link do grupo poderá ver e editar despesas. Compartilhe com cautela!",
+    "copyLink": "Copiar link",
+    "shareLink": "Compartilhar link"
   },
   "SchemaErrors": {
     "min1": "Digite pelo menos um caractere.",
@@ -430,7 +430,7 @@
     "noZeroShares": "Todas as partes devem ser maiores que 0.",
     "amountSum": "A soma dos valores deve ser igual ao valor da despesa.",
     "percentageSum": "A soma das porcentagens deve ser igual a 100.",
-    "ratePositive": "A taxa deve ser estritamente maior que zero."
+    "ratePositive": "A taxa deve ser maior que zero."
   },
   "Categories": {
     "search": "Pesquisar categoria...",

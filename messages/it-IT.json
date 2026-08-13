@@ -57,13 +57,6 @@
       "create": "Creane uno",
       "orAsk": "oppure chiedi a un amico di inviarti il link a uno esistente."
     },
-    "GlobalBalance": {
-      "title": "Il tuo saldo totale",
-      "description": "Il tuo saldo complessivo in tutti i tuoi gruppi.",
-      "owedToYou": "Ti devono",
-      "youOwe": "Devi",
-      "settledUp": "Sei in pari in tutti i tuoi gruppi."
-    },
     "recent": "Gruppi recenti",
     "starred": "Gruppi speciali",
     "archived": "Gruppi archiviati",
@@ -85,6 +78,13 @@
     "NotFound": {
       "text": "Questo gruppo non esiste.",
       "link": "Vai ai gruppi visitati di recente"
+    },
+    "GlobalBalance": {
+      "title": "Il tuo saldo totale",
+      "description": "Il tuo saldo complessivo in tutti i tuoi gruppi.",
+      "owedToYou": "Ti devono",
+      "youOwe": "Devi",
+      "settledUp": "Sei in pari in tutti i tuoi gruppi."
     }
   },
   "GroupForm": {
@@ -129,10 +129,10 @@
       "cancel": "Annulla"
     },
     "CurrencyCodeField": {
-      "label": "Valuta principale",
-      "createDescription": "Tutti gli importi e i saldi saranno in questa valuta.",
-      "editDescription": "Tutti gli importi e i saldi saranno in questa valuta. La modifica NON convertirà le spese già inserite, tranne quando la valuta ha \"unità minori\" diverse da quella attuale (ad es. passando dal dollaro statunitense allo yen giapponese)",
-      "customOption": "Personalizzata"
+      "label": "Moneta principale",
+      "createDescription": "Tutti gli importi e i saldi saranno in questa moneta.",
+      "customOption": "Personalizzato",
+      "editDescription": "Tutti gli importi e i saldi saranno in questa valuta. Se cambi questa opzione NON verranno convertite le spese già inserite, ad eccezione di quando la valuta ha una struttura sub-unitaria differente (es. se si cambia da Dollari Americani a Yen Giapponesi)"
     }
   },
   "ExpenseForm": {
@@ -153,6 +153,14 @@
         "label": "Ricevuta da",
         "description": "Seleziona il partecipante che ha ricevuto l'entrata."
       },
+      "recurrenceRule": {
+        "label": "Spesa ricorrente",
+        "description": "Seleziona quanto spesso deve ripetersi.",
+        "none": "Mai",
+        "daily": "Giornaliera",
+        "weekly": "Settimanale",
+        "monthly": "Mensile"
+      },
       "paidFor": {
         "title": "Ricevuto per",
         "description": "Seleziona per chi è stato ricevuto il reddito."
@@ -160,8 +168,8 @@
       "splitModeDescription": "Seleziona come dividere l'entrata.",
       "attachDescription": "Vedi ed allega la ricevuta per l'entrata.",
       "currencyField": {
-        "label": "Valuta dell'entrata",
-        "description": "La valuta in cui è stata ricevuta l'entrata."
+        "label": "Valuta di ingresso",
+        "description": "La valuta in cui il pagamento è stato ricevuto."
       }
     },
     "Expense": {
@@ -197,8 +205,8 @@
       "splitModeDescription": "Seleziona come dividere la spesa.",
       "attachDescription": "Vedi ed allega la ricevuta per la spesa.",
       "currencyField": {
-        "label": "Valuta della spesa",
-        "description": "La valuta in cui è stata pagata la spesa."
+        "label": "Valuta di spesa",
+        "description": "La valuta in cui la spesa è stata pagata."
       }
     },
     "amountField": {
@@ -241,15 +249,15 @@
     "reimbursement": "Rimborso",
     "conversionRateState": {
       "refresh": "Aggiornare",
-      "loading": "Recupero dei tassi di cambio…",
+      "loading": "Recuperando i tassi di cambio…",
       "success": "Tassi ottenuti:",
       "error": "Ops, non siamo riusciti a ottenere i tassi più recenti.",
-      "staleRate": "Tasso utilizzato:",
-      "noRate": "Inserisci un tasso personalizzato qui sotto.",
-      "currencyNotFound": "Ops, Frankfurter non ha il tasso per questa valuta in questa data.",
-      "noDate": "Inserisci la data della spesa per ottenere un tasso di conversione.",
-      "dateMismatch": "Tassi della data: {date}",
-      "customRate": "Tasso personalizzato in uso"
+      "staleRate": "Tasso di utilizzo:",
+      "noRate": "Inserisci qui sotto un tasso personalizzato.",
+      "currencyNotFound": "Ops, Frankfurter non dispone del tasso di cambio per questa valuta in questo giorno.",
+      "noDate": "Inserisci la data della spesa per ottenere il tasso di cambio.",
+      "dateMismatch": "Tassi a partire dalla data: {date}",
+      "customRate": "Utilizzando il tasso personalizzato"
     },
     "conversionUnavailable": "Per impostare una valuta diversa per ogni spesa e convertire gli importi, seleziona una valuta non personalizzata per il gruppo.",
     "originalAmountField": {
@@ -258,9 +266,9 @@
       "repaymentDescription": "Convertito dall'importo qui sopra, che è quello che pareggia i conti."
     },
     "conversionRateField": {
+      "label": "Tasso di cambio",
       "useApi": "Usa i tassi di Frankfurter",
-      "useCustom": "Usa un tasso personalizzato",
-      "label": "Tasso di cambio"
+      "useCustom": "Usa tasso personalizzato"
     }
   },
   "ExpenseDocumentsInput": {
@@ -409,10 +417,10 @@
   "Share": {
     "title": "Condividi",
     "description": "Per consentire agli altri partecipanti di vedere il gruppo e aggiungere spese, condividi il suo URL con loro.",
-    "copyLink": "Copia link",
-    "shareLink": "Condividi link",
     "warning": "Attenzione!",
-    "warningHelp": "Ogni persona con l'URL del gruppo potrà vedere e modificare le spese. Condividi con cautela!"
+    "warningHelp": "Ogni persona con l'URL del gruppo potrà vedere e modificare le spese. Condividi con cautela!",
+    "copyLink": "Copia link",
+    "shareLink": "Condividi link"
   },
   "SchemaErrors": {
     "min1": "Inserisci almeno un carattere.",
@@ -505,10 +513,10 @@
     "search": "Cerca valuta...",
     "noCurrency": "Nessuna valuta trovata.",
     "custom": {
-      "heading": "Personalizzata"
+      "heading": "Personalizzato"
     },
     "common": {
-      "heading": "Più comuni"
+      "heading": "Più comune"
     },
     "other": {
       "heading": "Altre valute"

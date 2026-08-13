@@ -41,9 +41,9 @@ export const supportedCurrencyCodes = [
   'PHP',
   'SGD',
   'THB',
+  'VND',
   'ZAR',
   'COP',
-  'VND',
   'MKD',
   'MYR',
 ] as const

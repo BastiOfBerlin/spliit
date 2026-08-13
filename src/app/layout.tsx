@@ -6,6 +6,8 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Toaster } from '@/components/ui/toaster'
+import { Analytics } from '@/lib/analytics/analytics'
+import { getAnalyticsConfig } from '@/lib/analytics/config'
 import { effectiveBaseUrl } from '@/lib/env'
 import { TRPCProvider } from '@/trpc/client'
 import type { Metadata, Viewport } from 'next'
@@ -155,8 +157,13 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale()
   const messages = await getMessages()
+  const analyticsConfig = await getAnalyticsConfig()
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      dir={['ar', 'he'].includes(locale) ? 'rtl' : 'ltr'}
+      suppressHydrationWarning
+    >
       <ApplePwaSplash icon="/logo-with-text.png" color="#047857" />
       <body className="min-h-[100dvh] flex flex-col items-stretch bg-slate-50 bg-opacity-30 dark:bg-background">
         <NextIntlClientProvider messages={messages}>
@@ -164,17 +171,19 @@ export default async function RootLayout({
               `useTranslations`, which needs NextIntlClientProvider in its
               ancestor tree. */}
           <ServiceWorkerRegistration />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Suspense>
-              <ProgressBar />
-            </Suspense>
-            <Content>{children}</Content>
-          </ThemeProvider>
+          <Analytics config={analyticsConfig}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Suspense>
+                <ProgressBar />
+              </Suspense>
+              <Content>{children}</Content>
+            </ThemeProvider>
+          </Analytics>
         </NextIntlClientProvider>
       </body>
     </html>
