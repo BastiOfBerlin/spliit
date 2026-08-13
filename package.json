@@ -51,6 +51,7 @@
     "content-disposition": "^2.0.1",
     "dayjs": "^1.11.21",
     "embla-carousel-react": "^8.6.0",
+    "html5-qrcode": "^2.3.8",
     "lucide-react": "^1.17.0",
     "nanoid": "^5.1.16",
     "negotiator": "^1.0.0",

@@ -1,5 +1,6 @@
 'use client'
 import { CopyButton } from '@/components/copy-button'
+import { ShareQrCodeDialog } from '@/components/share-qr-code-dialog'
 import { ShareUrlButton } from '@/components/share-url-button'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,7 +13,6 @@ import { Group } from '@/generated/prisma/browser'
 import { useBaseUrl } from '@/lib/hooks'
 import { Share } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { QRCodeSVG } from 'qrcode.react'
 
 type Props = {
   group: Group
@@ -33,28 +33,16 @@ export function ShareButton({ group }: Props) {
       <PopoverContent align="end" className="[&_p]:text-sm flex flex-col gap-3">
         <p>{t('description')}</p>
         {url && (
-          <>
-            <div className="flex justify-center">
-              <QRCodeSVG
-                value={url}
-                size={180}
-                marginSize={2}
-                bgColor="#ffffff"
-                fgColor="#000000"
-                className="rounded-md"
-                title={t('title')}
-              />
-            </div>
-            <div className="flex gap-2">
-              <Input className="flex-1" defaultValue={url} readOnly />
-              <CopyButton text={url} title={t('copyLink')} />
-              <ShareUrlButton
-                text={`Join my group ${group.name} on Spliit`}
-                url={url}
-                title={t('shareLink')}
-              />
-            </div>
-          </>
+          <div className="flex gap-2">
+            <Input className="flex-1" defaultValue={url} readOnly />
+            <CopyButton text={url} title={t('copyLink')} />
+            <ShareUrlButton
+              text={`Join my group ${group.name} on Spliit`}
+              url={url}
+              title={t('shareLink')}
+            />
+            <ShareQrCodeDialog url={url} groupName={group.name} />
+          </div>
         )}
         <p>
           <strong>{t('warning')}</strong> {t('warningHelp')}
