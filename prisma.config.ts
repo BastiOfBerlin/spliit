@@ -6,7 +6,6 @@ import { defineConfig } from 'prisma/config'
 // (Docker / Next.js) the variables are already present in the environment, and
 // a missing `.env` file or `dotenv` package is harmless.
 try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   require('dotenv').config()
 } catch {}
 
