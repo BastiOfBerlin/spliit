@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Read name/version from package.json using only POSIX tools, so the image can
-# be built on hosts where Node.js/npm is not installed (see upstream #219).
+# be built on hosts where Node.js/npm is not installed (see #219). Anchored on
+# the key and limited to the first match, so a dependency whose name happens to
+# contain "name" or "version" cannot add a second line to the result.
 read_pkg_field() {
   grep -m1 "\"$1\"[[:space:]]*:" package.json |
     sed -E "s/.*\"$1\"[[:space:]]*:[[:space:]]*\"([^\"]+)\".*/\1/"
