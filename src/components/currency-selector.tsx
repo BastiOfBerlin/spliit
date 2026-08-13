@@ -129,8 +129,8 @@ function CurrencyCommand({
   return (
     <Command>
       <CommandInput placeholder={t('search')} className="text-base" />
-      <CommandEmpty>{t('noCurrency')}</CommandEmpty>
       <CommandList className="w-full">
+        <CommandEmpty>{t('noCurrency')}</CommandEmpty>
         {Object.entries(currenciesByGroup).map(
           ([group, groupCurrencies], index) => (
             <CommandGroup key={index} heading={t(`${group}.heading`)}>

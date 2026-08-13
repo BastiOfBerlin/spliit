@@ -114,8 +114,8 @@ function CategoryCommand({
   return (
     <Command>
       <CommandInput placeholder={t('search')} className="text-base" />
-      <CommandEmpty>{t('noCategory')}</CommandEmpty>
       <CommandList className="w-full">
+        <CommandEmpty>{t('noCategory')}</CommandEmpty>
         {Object.entries(categoriesByGroup).map(
           ([group, groupCategories], index) => (
             <CommandGroup key={index} heading={t(`${group}.heading`)}>
