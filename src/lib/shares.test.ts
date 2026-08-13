@@ -31,12 +31,12 @@ function expense(
 }
 
 function sum(shares: Map<string, number>) {
-  return [...shares.values()].reduce((total, share) => total + share, 0)
+  return Array.from(shares.values()).reduce((total, share) => total + share, 0)
 }
 
 /** The shares themselves, smallest first — who gets which is a separate test. */
 function sorted(shares: Map<string, number>) {
-  return [...shares.values()].sort((a, b) => a - b)
+  return Array.from(shares.values()).sort((a, b) => a - b)
 }
 
 describe('getExpenseShares', () => {
@@ -57,7 +57,7 @@ describe('getExpenseShares', () => {
       )
 
       expect(sum(shares)).toBe(9500)
-      expect([...shares.values()].every(Number.isInteger)).toBe(true)
+      expect(Array.from(shares.values()).every(Number.isInteger)).toBe(true)
     },
   )
 

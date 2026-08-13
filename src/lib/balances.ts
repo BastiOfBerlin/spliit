@@ -34,12 +34,12 @@ export function getBalances(
       })),
     })
 
-    for (const [participantId, dividedAmount] of dividedAmounts) {
+    dividedAmounts.forEach((dividedAmount, participantId) => {
       if (!balances[participantId])
         balances[participantId] = { paid: 0, paidFor: 0, total: 0 }
 
       balances[participantId].paidFor += dividedAmount
-    }
+    })
   }
 
   // Every share is apportioned as a whole minor unit, so the rounding below is
