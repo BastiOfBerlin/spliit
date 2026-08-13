@@ -36,7 +36,9 @@ export const supportedCurrencyCodes = [
   'ILS',
   'INR',
   'KRW',
+  'MKD',
   'MXN',
+  'MYR',
   'NZD',
   'PHP',
   'SGD',
@@ -44,8 +46,6 @@ export const supportedCurrencyCodes = [
   'VND',
   'ZAR',
   'COP',
-  'MKD',
-  'MYR',
 ] as const
 export type supportedCurrencyCodeType = (typeof supportedCurrencyCodes)[number]
 
