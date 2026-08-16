@@ -240,7 +240,7 @@ export function ExpenseForm({
             originalCurrency: group.currencyCode,
             // Empty rather than undefined: the field is filled in by the conversion, and
             // switching an input from uncontrolled to controlled warns in React.
-            originalAmount: '',
+            originalAmount: '' as any,
             conversionRate: undefined,
             category: 1, // category with Id 1 is Payment
             paidBy: searchParams.get('from') ?? undefined,
@@ -322,6 +322,8 @@ export function ExpenseForm({
     } else {
       delete values.originalAmount
       delete values.originalCurrency
+      // Without this a repayment whose converted amount rounded to zero would
+      // still be saved with a rate but no amount to apply it to.
       delete values.conversionRate
     }
     return onSubmit(values, activeUserId ?? undefined)
@@ -488,7 +490,11 @@ export function ExpenseForm({
       // rejects. Leave the field empty rather than block a form the user cannot correct.
       form.setValue(
         'originalAmount',
-        Number(converted) === 0 ? '' : enforceCurrencyPattern(converted),
+        // String for consistent form handling, so trailing zeros survive; the schema
+        // coerces it, and it maps '' back to undefined.
+        (Number(converted) === 0
+          ? ''
+          : enforceCurrencyPattern(converted)) as any,
       )
     }
   }, [
@@ -694,6 +700,8 @@ export function ExpenseForm({
                           {!exchangeRate.isLoading && (
                             <Button
                               className="h-auto py-0"
+                              // Without this the button inherits type="submit"
+                              // and refreshing the rate submits the form.
                               type="button"
                               variant="link"
                               onClick={() => exchangeRate.refresh()}
