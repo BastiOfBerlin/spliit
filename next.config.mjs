@@ -24,8 +24,9 @@ if (process.env.S3_UPLOAD_ENDPOINT) {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Emit a self-contained server (.next/standalone) with only the traced
-  // production files, so the runtime image stays small.
+  // Emit a self-contained server into .next/standalone, containing only the
+  // files Next.js traced as actually reachable at runtime. The Docker runtime
+  // stage copies that instead of a full production `node_modules`.
   output: 'standalone',
   // Enable the React Compiler for automatic memoization (stable in Next.js 16).
   // Requires the babel-plugin-react-compiler dev dependency.

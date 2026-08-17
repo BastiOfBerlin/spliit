@@ -2,7 +2,9 @@
 
 set -euxo pipefail
 
-# Run the Prisma CLI directly (the standalone build does not expose it on PATH).
+# Invoke the Prisma CLI by path: the standalone image has no package.json
+# scripts and no .bin on PATH, so `npx prisma` would try to fetch it.
 node node_modules/prisma/build/index.js migrate deploy
-# Start the Next.js standalone server.
+
+# The standalone build's own server entry point, in place of `next start`.
 exec node server.js
