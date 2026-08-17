@@ -12,6 +12,9 @@ const openai = new OpenAI({
   baseURL: env.OPENAI_BASE_URL,
 })
 
+// The model is contractually bound to this shape by `strict: true` below, but
+// the response is still parsed rather than trusted: a self-hosted or older
+// endpoint may ignore the schema.
 const receiptResponseSchema = z.object({
   amount: z.number(),
   categoryId: z.string(),
@@ -66,14 +69,12 @@ export async function extractExpenseInformationFromImage(imageUrl: string) {
             type: 'text',
             text: `
               This image contains a receipt.
-              Read the total amount as a plain number without currency symbols.
-              Guess the category ID from this list: ${categories.map(
-                (category: (typeof categories)[number]) =>
-                  formatCategoryForAIPrompt(category),
+              Read the total amount and store it as a non-formatted number without any other text or currency.
+              Then guess the category for this receipt among the following categories and store its ID: ${categories.map(
+                (category) => formatCategoryForAIPrompt(category),
               )}.
-              Guess the expense's date in yyyy-mm-dd format.
-              Guess a short title for the expense.
-              Return a JSON object with fields: amount (number), categoryId (string), date (string), title (string).`,
+              Guess the expense’s date and store it as yyyy-mm-dd.
+              Guess a title for the expense.`,
           },
         ],
       },
@@ -90,7 +91,8 @@ export async function extractExpenseInformationFromImage(imageUrl: string) {
     try {
       return receiptResponseSchema.parse(JSON.parse(messageContent))
     } catch {
-      // Malformed or schema-violating model output: treat as "nothing extracted"
+      // Malformed or schema-violating output: report "nothing extracted"
+      // rather than passing junk on to the expense form.
       return null
     }
   })()

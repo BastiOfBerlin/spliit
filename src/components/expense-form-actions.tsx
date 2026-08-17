@@ -4,6 +4,7 @@ import { env } from '@/lib/env'
 import { getRuntimeFeatureFlags } from '@/lib/featureFlags'
 import { formatCategoryForAIPrompt } from '@/lib/utils'
 import OpenAI from 'openai'
+import { z } from 'zod'
 
 const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
@@ -13,6 +14,14 @@ const openai = new OpenAI({
 /** Limit of characters to be evaluated. May help avoiding abuse when using AI. */
 const limit = 40 // ~10 tokens
 
+// See the note in create-from-receipt-button-actions.ts: `strict: true` binds
+// the model to this shape, but the response is parsed rather than trusted.
+const categoryResponseSchema = z.object({ categoryId: z.number() })
+
+/**
+ * Attempt extraction of category from expense title
+ * @param description Expense title or description. Only the first characters as defined in {@link limit} will be used.
+ */
 export async function extractCategoryFromTitle(description: string) {
   'use server'
 
@@ -34,9 +43,7 @@ export async function extractCategoryFromTitle(description: string) {
         strict: true,
         schema: {
           type: 'object',
-          properties: {
-            categoryId: { type: 'integer' },
-          },
+          properties: { categoryId: { type: 'integer' } },
           required: ['categoryId'],
           additionalProperties: false,
         },
@@ -46,8 +53,8 @@ export async function extractCategoryFromTitle(description: string) {
       {
         role: 'system',
         content: `
-        Task: Receive expense titles. Respond with the most relevant category ID from the list below as a JSON object with a "categoryId" field.
-        Categories: ${categories.map((category: (typeof categories)[number]) =>
+        Task: Receive expense titles. Respond with the most relevant category ID from the list below.
+        Categories: ${categories.map((category) =>
           formatCategoryForAIPrompt(category),
         )}
         Fallback: If no category fits, default to ${formatCategoryForAIPrompt(
@@ -66,15 +73,15 @@ export async function extractCategoryFromTitle(description: string) {
   const parsed = (() => {
     if (!messageContent) return null
     try {
-      return JSON.parse(messageContent) as { categoryId: number }
+      return categoryResponseSchema.parse(JSON.parse(messageContent))
     } catch {
       return null
     }
   })()
   // ensure the returned id actually exists
-  const category = categories.find(
-    (c: (typeof categories)[number]) => c.id === Number(parsed?.categoryId),
-  )
+  const category = categories.find((category) => {
+    return category.id === parsed?.categoryId
+  })
   // fall back to first category (should be "General") if no category matches the output
   return { categoryId: category?.id || 0 }
 }
