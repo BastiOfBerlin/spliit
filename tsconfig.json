@@ -10,6 +10,7 @@
       "node",
       "jest"
     ],
+    "rootDir": ".",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

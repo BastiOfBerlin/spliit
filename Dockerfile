@@ -21,8 +21,8 @@ RUN apk add --no-cache openssl && \
 COPY ./src ./src
 COPY ./messages ./messages
 
-# Prisma 7 generates the client into ./src/generated/prisma (no longer into
-# node_modules), so generate after the source tree is in place.
+# Prisma 7 generates the client into ./src/generated/prisma instead of
+# node_modules, so this has to run after the source tree is in place.
 RUN npx prisma generate
 
 ENV NEXT_TELEMETRY_DISABLED=1
