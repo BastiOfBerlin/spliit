@@ -8,8 +8,6 @@ export const metadata: Metadata = {
 
 export default function CreateGroupPage() {
   const defaultCurrencyCode =
-    env.DEFAULT_CURRENCY_CODE ??
-    process.env.NEXT_PUBLIC_DEFAULT_CURRENCY_CODE ??
-    'USD'
+    env.DEFAULT_CURRENCY_CODE ?? env.NEXT_PUBLIC_DEFAULT_CURRENCY_CODE ?? 'USD'
   return <CreateGroup defaultCurrencyCode={defaultCurrencyCode} />
 }

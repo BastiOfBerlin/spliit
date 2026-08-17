@@ -201,47 +201,53 @@ The application has a health check endpoint that can be used to check if the app
 
 ## Configuration
 
-All environment variables listed here are read at runtime. For a container deployment, set them in `container.env` or pass them with `docker run -e`. No rebuild is required.
+Every variable below is read at runtime. For a container deployment, set them in
+`container.env` or pass them with `docker run -e`; no rebuild is required, which
+means the published image can be configured by whoever runs it.
 
 ### Application URL
 
-Set `BASE_URL` to the public URL your instance is reachable at. It is used for SEO metadata, sitemaps, and Open Graph tags.
+Set `BASE_URL` to the public URL your instance is reachable at. It is used for
+metadata, the sitemap, `robots.txt`, and to accept server actions sent to that
+host.
 
 ```.env
 BASE_URL=https://spliit.example.com
 ```
 
-Defaults to `http://localhost:3000` when not set.
+Defaults to `http://localhost:3000`.
 
 ### Default currency
 
-Set `DEFAULT_CURRENCY_CODE` to pre-select a currency when users create a new group.
+Set `DEFAULT_CURRENCY_CODE` to pre-select a currency on the new-group form.
 
 ```.env
 DEFAULT_CURRENCY_CODE=EUR
 ```
 
-Defaults to `USD` when not set.
+Defaults to `USD`.
 
-### Migrating from `NEXT_PUBLIC_*` variables
+### Migrating from the `NEXT_PUBLIC_*` variables
 
-Earlier versions used `NEXT_PUBLIC_`-prefixed variables for the settings above. These were **inlined into the app at build time**, so they could not be changed in a prebuilt image (such as the published Docker image) — the only way to change them was to rebuild. The runtime variables below replace them and can be set at deploy time without a rebuild.
+Earlier versions used `NEXT_PUBLIC_`-prefixed variables for the settings above
+and for the opt-in feature flags below. Next.js **inlines those into the app at
+build time**, so in a prebuilt image — like the published one — they are frozen
+at whatever the release build used and setting them at runtime does nothing. The
+runtime variables replace them:
 
-Rename your variables as follows:
+| Old (build-time)                       | New (runtime)              |
+| -------------------------------------- | -------------------------- |
+| `NEXT_PUBLIC_BASE_URL`                 | `BASE_URL`                 |
+| `NEXT_PUBLIC_DEFAULT_CURRENCY_CODE`    | `DEFAULT_CURRENCY_CODE`    |
+| `NEXT_PUBLIC_ENABLE_EXPENSE_DOCUMENTS` | `ENABLE_EXPENSE_DOCUMENTS` |
+| `NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT`   | `ENABLE_RECEIPT_EXTRACT`   |
+| `NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT`  | `ENABLE_CATEGORY_EXTRACT`  |
 
-| Old (build-time, `NEXT_PUBLIC_*`)     | New (runtime)              |
-| ------------------------------------- | -------------------------- |
-| `NEXT_PUBLIC_BASE_URL`                | `BASE_URL`                 |
-| `NEXT_PUBLIC_DEFAULT_CURRENCY_CODE`   | `DEFAULT_CURRENCY_CODE`    |
-| `NEXT_PUBLIC_ENABLE_EXPENSE_DOCUMENTS`| `ENABLE_EXPENSE_DOCUMENTS` |
-| `NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT`  | `ENABLE_RECEIPT_EXTRACT`   |
-| `NEXT_PUBLIC_ENABLE_CATEGORY_EXTRACT` | `ENABLE_CATEGORY_EXTRACT`  |
-
-Notes:
-
-- **The old variables still work** for backward compatibility — the new runtime variant simply takes precedence when both are set. You don't have to migrate immediately, but the `NEXT_PUBLIC_*` variants only take effect when you build the image yourself; in a prebuilt image they were frozen at build time and have no effect at runtime.
-- When migrating, drop the `NEXT_PUBLIC_` prefix and set the variable in your runtime environment (e.g. `container.env` or `docker run -e`). No rebuild is needed.
-- If your environment file was created on Windows, make sure it uses **LF line endings**. A trailing carriage return turns `true` into `true\r`, which silently disables a flag (and a key like `OPENAI_API_KEY` ending in `\r` will fail authentication).
+**The old variables still work** — the runtime variant simply takes precedence
+when both are set, so there is nothing you have to change immediately. They
+remain the right choice if you build your own image and want a setting baked in.
+To migrate, drop the `NEXT_PUBLIC_` prefix and set the variable wherever your
+container gets its environment.
 
 ## Opt-in features
 

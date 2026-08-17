@@ -2,9 +2,8 @@ import GroupExpensesPageClient from '@/app/groups/[groupId]/expenses/page.client
 import { env } from '@/lib/env'
 import { Metadata } from 'next'
 
-// Render at request time so the feature flag reflects the *runtime* env.
-// NEXT_PUBLIC_* vars are inlined at build time and can't be toggled in a
-// prebuilt image; the non-public ENABLE_RECEIPT_EXTRACT can.
+// Render at request time rather than caching for an hour, so the flag below
+// reflects the environment the container was started with.
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {

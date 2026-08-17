@@ -6,11 +6,14 @@ const parseFlag = (val: string | undefined) =>
   ['true', 'yes', '1', 'on'].includes((val ?? '').trim().toLowerCase())
 
 export async function getRuntimeFeatureFlags() {
-  // Read ENABLE_* directly from process.env on every call so the live runtime
-  // value is used rather than the module-level snapshot in `env`. Next.js does
-  // not inline non-NEXT_PUBLIC_ vars in server bundles, so this is a true
-  // runtime read. env.NEXT_PUBLIC_* are baked at build time (correct behaviour:
-  // they reflect the build-time flag value for self-built images).
+  // The ENABLE_* vars are read from process.env on every call rather than from
+  // the module-level `env` snapshot, which is parsed once at import. In a
+  // long-running server the two are the same; reading live keeps this correct
+  // if the module is ever imported before the environment is complete.
+  //
+  // env.NEXT_PUBLIC_* are read from the snapshot on purpose: Next.js inlines
+  // them at build time, so the snapshot *is* the build-time value, which is the
+  // right answer for a self-built image.
   return {
     enableExpenseDocuments:
       parseFlag(process.env.ENABLE_EXPENSE_DOCUMENTS) ||

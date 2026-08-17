@@ -51,6 +51,7 @@ export type Props = {
     participantId?: string,
   ) => Promise<void>
   protectedParticipantIds?: string[]
+  /** Resolved on the server, since the runtime variable is not public. */
   defaultCurrencyCode?: string
 }
 
@@ -76,7 +77,7 @@ export function GroupForm({
           name: '',
           information: '',
           currency: '',
-          currencyCode: defaultCurrencyCode, // TODO: determine default from locale when not explicitly configured
+          currencyCode: defaultCurrencyCode, // TODO: derive from the locale when not configured
           participants: [
             { name: t('Participants.John') },
             { name: t('Participants.Jane') },
